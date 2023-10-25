@@ -13,6 +13,7 @@ import {
 } from "./styles";
 import { TitledInput } from "../../components/TitledInput";
 import { Button } from "../../components/Button";
+import { Link } from "react-router-dom";
 
 export const Register: React.FC = () => {
   return (
@@ -28,8 +29,12 @@ export const Register: React.FC = () => {
             placeholder="Insira sua chave do pix"
           />
           <ContainerButtons>
-            <Button label={"Cancelar"} />
-            <Button label={"Cadastrar-se"} />
+            <Link to={`/`}>
+              <Button label={"Cancelar"} />
+            </Link>
+            <Link to={`/`}>
+              <Button label={"Cadastrar-se"} />
+            </Link>
           </ContainerButtons>
         </ContainerBody>
       </Content>

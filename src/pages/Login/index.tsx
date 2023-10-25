@@ -14,6 +14,7 @@ import {
 } from "./styles";
 import { TitledInput } from "../../components/TitledInput";
 import { Button } from "../../components/Button";
+import { Link } from "react-router-dom";
 
 export const Login: React.FC = () => {
   return (
@@ -24,10 +25,13 @@ export const Login: React.FC = () => {
         </ContainerTitle>
 
         <ContainerBody>
-          <TitledInput label={"Email"} placeholder="Insira seu email..."/>
-          <TitledInput label={"Senha"} placeholder="Insira sua senha"/>
+          <TitledInput label={"Email"} placeholder="Insira seu email..." />
+          <TitledInput label={"Senha"} placeholder="Insira sua senha" />
           <ContainerButtons>
-            <Button label={"Cadastrar-se"} />
+            <Link to={`register`}>
+              <Button label={"Cadastrar-se"} />
+            </Link>
+
             <Button label={"Login"} />
           </ContainerButtons>
         </ContainerBody>
