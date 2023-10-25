@@ -4,7 +4,14 @@ import React from "react";
 // Components
 
 // Styles
-import { Container, ContainerBody, ContainerButtons, ContainerTitle, Content, Title } from "./styles";
+import {
+  Container,
+  ContainerBody,
+  ContainerButtons,
+  ContainerTitle,
+  Content,
+  Title,
+} from "./styles";
 import { TitledInput } from "../../components/TitledInput";
 import { Button } from "../../components/Button";
 
@@ -17,12 +24,12 @@ export const Login: React.FC = () => {
         </ContainerTitle>
 
         <ContainerBody>
-           <TitledInput label={"Email"} />
-        <TitledInput label={"Senha"} />
-        <ContainerButtons>
-          <Button label={"Cadastrar-se"} />
-          <Button label={"Login"} />
-        </ContainerButtons>
+          <TitledInput label={"Email"} placeholder="Insira seu email..."/>
+          <TitledInput label={"Senha"} placeholder="Insira sua senha"/>
+          <ContainerButtons>
+            <Button label={"Cadastrar-se"} />
+            <Button label={"Login"} />
+          </ContainerButtons>
         </ContainerBody>
       </Content>
     </Container>
