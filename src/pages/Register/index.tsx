@@ -23,6 +23,7 @@ export const Register: React.FC = () => {
     senha: "",
     chavePix: "",
   });
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,12 +33,29 @@ export const Register: React.FC = () => {
     });
   };
 
+  const isEmailValid = (email: string) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (Object.values(formData).some(value => value === '')) {
+      alert('Por favor, preencha todos os campos antes de enviar.');
+      return;
+    }
+
+    if (!isEmailValid(formData.email)) {
+      alert('Por favor, insira um endereço de e-mail válido.');
+      return;
+    }
+
     axios
       .post("http://localhost:3001/users", formData)
       .then((response) => {
         console.log("Dados enviados com sucesso:", response.data);
+        setShowSuccessModal(true);
       })
       .catch((error) => {
         console.error("Erro ao enviar os dados:", error);
