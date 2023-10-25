@@ -9,14 +9,19 @@ height: 100vh;
 
 export const Content = styled.div`
 display: flex;
-padding: 2rem;
+padding: 5rem 2rem 5rem 2rem;
 flex-direction:column;
 background-color: #f7fafe;
-width: 40%;
+width: 30%;
+border-radius: 5px;
+border: 1px solid #ddecfa;
 `
 
 export const ContainerButtons = styled.div`
 display: flex;
 flex-direction:row;
+width: 100%;
+gap: 2rem;
+justify-content: flex-end;
 `
 
