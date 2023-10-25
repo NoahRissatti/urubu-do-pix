@@ -18,17 +18,18 @@ import { Link } from "react-router-dom";
 
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:3001';
-
-axios.get(`${apiUrl}/posts`)
-  .then(response => {
-    // Faça algo com os dados
-  })
-  .catch(error => {
-    // Trate os erros
-  });
-
 export const Login: React.FC = () => {
+  const apiUrl = 'http://localhost:3001';
+
+  axios.get(`${apiUrl}/posts`)
+    .then(response => {
+      console.log(response.data);
+      
+    })
+    .catch(error => {
+      // Trate os erros
+    });
+
   return (
     <Container>
       <Content>
