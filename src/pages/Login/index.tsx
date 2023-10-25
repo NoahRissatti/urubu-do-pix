@@ -31,7 +31,6 @@ export const Login: React.FC = () => {
             <Link to={`register`}>
               <Button label={"Cadastrar-se"} />
             </Link>
-
             <Button label={"Login"} />
           </ContainerButtons>
         </ContainerBody>
