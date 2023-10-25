@@ -22,3 +22,16 @@ border-radius: 5px;
 border: 1px solid #ddecfa;
 gap: 2rem;
 `
+
+export const ContainerBody = styled.div`
+display: flex;
+flex-direction:column;
+`
+
+export const ContainerButtons = styled.div`
+display: flex;
+flex-direction:row;
+width: 100%;
+gap: 2rem;
+justify-content: flex-end;
+`
