@@ -15,6 +15,7 @@ import { TitledInput } from "../../components/TitledInput";
 import { Button } from "../../components/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { SuccessModal } from "../../components/SuccessModal";
 
 export const Register: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -41,13 +42,13 @@ export const Register: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (Object.values(formData).some(value => value === '')) {
-      alert('Por favor, preencha todos os campos antes de enviar.');
+    if (Object.values(formData).some((value) => value === "")) {
+      alert("Por favor, preencha todos os campos antes de enviar.");
       return;
     }
 
     if (!isEmailValid(formData.email)) {
-      alert('Por favor, insira um endereço de e-mail válido.');
+      alert("Por favor, insira um endereço de e-mail válido.");
       return;
     }
 
@@ -67,40 +68,46 @@ export const Register: React.FC = () => {
         <Title>Cadastre-se para utilizar o Urubo do Pix</Title>
         <ContainerBody>
           <form onSubmit={handleSubmit}>
-            <TitledInput
-              label={"Nome"}
-              placeholder="Insira seu nome"
-              name="nome"
-              value={formData.nome}
-              onChange={handleChange}
-            />
-            <TitledInput
-              label={"Email"}
-              placeholder="Insira seu email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            <TitledInput
-              label={"Senha"}
-              placeholder="Insira sua senha"
-              name="senha"
-              value={formData.senha}
-              onChange={handleChange}
-            />
-            <TitledInput
-              label={"Chave do Pix"}
-              placeholder="Insira sua chave do Pix"
-              name="chavePix"
-              value={formData.chavePix}
-              onChange={handleChange}
-            />
-            <ContainerButtons>
-              <Link to={`/`}>
-                <Button label={"Cancelar"} />
-              </Link>
-              <button type="submit">Cadastrar-se</button>
-            </ContainerButtons>
+            {showSuccessModal ? (
+              <SuccessModal onClose={() => setShowSuccessModal(false)} />
+            ) : (
+              <>
+                <TitledInput
+                  label={"Nome"}
+                  placeholder="Insira seu nome"
+                  name="nome"
+                  value={formData.nome}
+                  onChange={handleChange}
+                />
+                <TitledInput
+                  label={"Email"}
+                  placeholder="Insira seu email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                <TitledInput
+                  label={"Senha"}
+                  placeholder="Insira sua senha"
+                  name="senha"
+                  value={formData.senha}
+                  onChange={handleChange}
+                />
+                <TitledInput
+                  label={"Chave do Pix"}
+                  placeholder="Insira sua chave do Pix"
+                  name="chavePix"
+                  value={formData.chavePix}
+                  onChange={handleChange}
+                />
+                <ContainerButtons>
+                  <Link to={`/`}>
+                    <Button label={"Cancelar"} />
+                  </Link>
+                  <button type="submit">Cadastrar-se</button>
+                </ContainerButtons>
+              </>
+            )}
           </form>
         </ContainerBody>
       </Content>

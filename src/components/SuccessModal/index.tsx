@@ -11,18 +11,21 @@ import {
   SuccessModalText,
   SuccessModalTitle,
 } from "./styles";
+import { Link } from "react-router-dom";
 
-interface Props{
-  onClose: () => void
+interface Props {
+  onClose: () => void;
 }
 
-export const SucessModal: React.FC<Props> = ({onClose}) => {
+export const SuccessModal: React.FC<Props> = ({ onClose }) => {
   return (
     <SuccessModalContainer>
       <SuccessModalContent>
         <SuccessModalTitle>Cadastro bem-sucedido!</SuccessModalTitle>
         <SuccessModalText>Sua conta foi criada com sucesso.</SuccessModalText>
-        <SuccessModalButton onClick={onClose}>Fazer Login</SuccessModalButton>
+        <Link to={'/'}>
+          <SuccessModalButton onClick={onClose}>Fazer Login</SuccessModalButton>
+        </Link>
       </SuccessModalContent>
     </SuccessModalContainer>
   );
