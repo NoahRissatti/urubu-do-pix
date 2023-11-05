@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Title } from './styles';
+import { Container, DataContainer, SimpleText, Subtitle, Title } from './styles';
 import axios from 'axios';
 import { IUserFromJson } from './types';
 import { useAuthContext } from '../../contexts/useAuthContext';
+import { Button } from '../../components/Button';
 
 export const Landing: React.FC = () => {
   const { user: authUser } = useAuthContext();
@@ -30,6 +31,22 @@ export const Landing: React.FC = () => {
   return (
     <Container>
       <Title>Seja bem vindo(a), {user?.nome}</Title>
+      
+      <DataContainer>
+        <Subtitle>E-mail: </Subtitle>
+    	  <SimpleText>{user?.email}</SimpleText>
+      </DataContainer>
+
+      <DataContainer>
+        <Subtitle>Chave do pix: </Subtitle>
+    	  <SimpleText>{user?.chavePix}</SimpleText>
+      </DataContainer>
+
+      <DataContainer>
+        <Button label={'Editar dados'}/>
+
+        <Button label={'Excluir perfil'} style={{backgroundColor: 'red'}}/>
+      </DataContainer>
     </Container>
   );
 };

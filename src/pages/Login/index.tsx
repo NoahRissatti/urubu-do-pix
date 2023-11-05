@@ -93,10 +93,6 @@ export const Login: React.FC = () => {
               <Button label={'Cadastrar-se'} />
             </Link>
 
-            {/* <Link to={`/landing`}>
-              <Button label={"Login"} onClick={handleLogin}/>
-            </Link> */}
-
             <Button label={"Login"} onClick={handleLogin}/>
           </ContainerButtons>
         </ContainerBody>
