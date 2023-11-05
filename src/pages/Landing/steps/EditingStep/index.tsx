@@ -33,6 +33,16 @@ export const EditingStep: React.FC<Props> = ({ user, setIsEditing }) => {
   };
 
   const handleEdit = () => {
+    if (
+      formData.nome.trim() === '' ||
+      formData.email.trim() === '' ||
+      formData.senha.trim() === '' ||
+      formData.chavePix.trim() === ''
+    ) {
+      alert('Por favor, preencha todos os campos antes de confirmar a edição.');
+      return;
+    }
+
     axios
       .put(`http://localhost:3001/users/${user?.id}`, formData)
       .then(response => {
@@ -91,7 +101,7 @@ export const EditingStep: React.FC<Props> = ({ user, setIsEditing }) => {
         <DataContainer>
           <Button label={'Confirmar edição'} onClick={handleEdit}/>
 
-          <Button label={'Cancelar'} style={{backgroundColor: 'red'}}/>
+          <Button label={'Cancelar'} style={{backgroundColor: 'red'}} onClick={() => setIsEditing(false)}/>
         </DataContainer>
     </Container>
   
