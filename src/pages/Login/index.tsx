@@ -17,10 +17,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { IUser } from "./types";
 import { useAuthContext } from "../../contexts/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const Login: React.FC = () => {
 
   const { login } = useAuthContext();
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -49,6 +52,7 @@ export const Login: React.FC = () => {
 
     if (user) {
       login(user)
+      navigate('/landing')
     } else {
       alert('Email ou senha incorretos. Tente novamente.');
     }
@@ -89,10 +93,11 @@ export const Login: React.FC = () => {
               <Button label={'Cadastrar-se'} />
             </Link>
 
-            { }
-            <Link to={`/landing`}>
+            {/* <Link to={`/landing`}>
               <Button label={"Login"} onClick={handleLogin}/>
-            </Link>
+            </Link> */}
+
+            <Button label={"Login"} onClick={handleLogin}/>
           </ContainerButtons>
         </ContainerBody>
       </Content>
