@@ -30,6 +30,19 @@ export const Landing: React.FC = () => {
     return <div>Carregando...</div>;
   }
 
+  const handleDeleteUser = () => {
+    const confirmDelete = window.confirm("Tem certeza que quer excluir esse usuário?");
+    if (confirmDelete) {
+      axios.delete(`http://localhost:3001/users/${user?.id}`)
+      .then(response => {
+        console.log("Usuário excluído com sucesso:", response.data);
+      })
+      .catch(error => {
+        console.error("Erro ao excluir o usuário:", error);
+      });
+    }
+  };
+
   return (
     <Container>
       { isEditing ? 
@@ -51,7 +64,7 @@ export const Landing: React.FC = () => {
           <DataContainer>
             <Button label={'Editar dados'} onClick={() => setIsEditing(!isEditing)}/>
 
-            <Button label={'Excluir perfil'} style={{backgroundColor: 'red'}}/>
+            <Button label={'Excluir perfil'} onClick={handleDeleteUser} style={{backgroundColor: 'red'}}/>
           </DataContainer>
         </>
         }
