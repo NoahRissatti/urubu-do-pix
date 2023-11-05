@@ -4,11 +4,13 @@ import axios from 'axios';
 import { IUserFromJson } from './types';
 import { useAuthContext } from '../../contexts/useAuthContext';
 import { Button } from '../../components/Button';
+import { EditingStep } from './steps/EditingStep';
 
 export const Landing: React.FC = () => {
   const { user: authUser } = useAuthContext();
   const [user, setUser] = useState<IUserFromJson | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (authUser) {
@@ -30,23 +32,30 @@ export const Landing: React.FC = () => {
 
   return (
     <Container>
-      <Title>Seja bem vindo(a), {user?.nome}</Title>
+      { isEditing ? 
+        <EditingStep user={user}/> 
+        : 
+        <>
+          <Title>Seja bem vindo(a), {user?.nome}</Title>
       
-      <DataContainer>
-        <Subtitle>E-mail: </Subtitle>
-    	  <SimpleText>{user?.email}</SimpleText>
-      </DataContainer>
+          <DataContainer>
+            <Subtitle>E-mail: </Subtitle>
+            <SimpleText>{user?.email}</SimpleText>
+          </DataContainer>
 
-      <DataContainer>
-        <Subtitle>Chave do pix: </Subtitle>
-    	  <SimpleText>{user?.chavePix}</SimpleText>
-      </DataContainer>
+          <DataContainer>
+            <Subtitle>Chave do pix: </Subtitle>
+            <SimpleText>{user?.chavePix}</SimpleText>
+          </DataContainer>
 
-      <DataContainer>
-        <Button label={'Editar dados'}/>
+          <DataContainer>
+            <Button label={'Editar dados'} onClick={() => setIsEditing(!isEditing)}/>
 
-        <Button label={'Excluir perfil'} style={{backgroundColor: 'red'}}/>
-      </DataContainer>
+            <Button label={'Excluir perfil'} style={{backgroundColor: 'red'}}/>
+          </DataContainer>
+        </>
+        }
+      
     </Container>
   );
 };

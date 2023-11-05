@@ -1,10 +1,5 @@
 import React, { createContext, useContext, PropsWithChildren, useState } from 'react';
-
-export interface IUser {
-  id: number;
-  email: string;
-  senha: string;
-}
+import { IUser } from '../../pages/Login/types';
 
 export interface IAuthContextData {
   user: IUser | null;
