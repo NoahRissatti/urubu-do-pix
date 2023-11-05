@@ -1,6 +1,5 @@
 // External Libraries
 import React, { useEffect, useState } from "react";
-
 // Components
 
 // Styles
@@ -17,12 +16,17 @@ import { Button } from "../../components/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { IUser } from "./types";
+import { useAuthContext } from "../../contexts/useAuthContext";
 
 export const Login: React.FC = () => {
+
+  const { login } = useAuthContext();
+
   const [formData, setFormData] = useState({
     email: "",
     senha: "",
   });
+
   const [users, setUsers] = useState<IUser[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +48,7 @@ export const Login: React.FC = () => {
     );
 
     if (user) {
-      alert('Login bem-sucedido!');
+      login(user)
     } else {
       alert('Email ou senha incorretos. Tente novamente.');
     }
@@ -56,6 +60,7 @@ export const Login: React.FC = () => {
       setUsers(response.data);
     });
   }, []);
+
   return (
     <Container>
       <Content>
@@ -83,7 +88,11 @@ export const Login: React.FC = () => {
             <Link to={'register'}>
               <Button label={'Cadastrar-se'} />
             </Link>
-            <button onClick={handleLogin}>Login</button>
+
+            { }
+            <Link to={`/landing`}>
+              <Button label={"Login"} onClick={handleLogin}/>
+            </Link>
           </ContainerButtons>
         </ContainerBody>
       </Content>

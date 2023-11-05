@@ -47,6 +47,13 @@
       "email": "nono",
       "senha": "nono",
       "id": 8
+    },
+    {
+      "nome": "laura",
+      "email": "laura@email.com",
+      "senha": "1234",
+      "chavePix": "123123123",
+      "id": 9
     }
   ]
 }
