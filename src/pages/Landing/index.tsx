@@ -33,7 +33,7 @@ export const Landing: React.FC = () => {
   return (
     <Container>
       { isEditing ? 
-        <EditingStep user={user}/> 
+        <EditingStep user={user} setIsEditing={setIsEditing}/> 
         : 
         <>
           <Title>Seja bem vindo(a), {user?.nome}</Title>

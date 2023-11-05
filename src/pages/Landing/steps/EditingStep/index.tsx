@@ -12,9 +12,10 @@ import { Button } from '../../../../components/Button'
 
 interface Props {
   user: IUserFromJson | null
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const EditingStep: React.FC<Props> = ({ user }) => {
+export const EditingStep: React.FC<Props> = ({ user, setIsEditing }) => {
   
   const [formData, setFormData] = useState({
     nome: "",
@@ -29,6 +30,18 @@ export const EditingStep: React.FC<Props> = ({ user }) => {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const handleEdit = () => {
+    axios
+      .put(`http://localhost:3001/users/${user?.id}`, formData)
+      .then(response => {
+        console.log('Dados do usuário atualizados com sucesso:', response.data);
+        setIsEditing(false)
+      })
+      .catch(error => {
+        console.error('Erro ao atualizar os dados do usuário:', error);
+      });
   };
 
   return (
@@ -76,7 +89,7 @@ export const EditingStep: React.FC<Props> = ({ user }) => {
         />
 
         <DataContainer>
-          <Button label={'Confirmar edição'}/>
+          <Button label={'Confirmar edição'} onClick={handleEdit}/>
 
           <Button label={'Cancelar'} style={{backgroundColor: 'red'}}/>
         </DataContainer>
