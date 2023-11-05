@@ -5,9 +5,13 @@ import { IUserFromJson } from './types';
 import { useAuthContext } from '../../contexts/useAuthContext';
 import { Button } from '../../components/Button';
 import { EditingStep } from './steps/EditingStep';
+import { useNavigate } from "react-router-dom";
 
 export const Landing: React.FC = () => {
   const { user: authUser } = useAuthContext();
+
+  const navigate = useNavigate();
+
   const [user, setUser] = useState<IUserFromJson | null>(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -36,6 +40,8 @@ export const Landing: React.FC = () => {
       axios.delete(`http://localhost:3001/users/${user?.id}`)
       .then(response => {
         console.log("Usuário excluído com sucesso:", response.data);
+        alert("Usuário excluído com sucesso.")
+        navigate('/')
       })
       .catch(error => {
         console.error("Erro ao excluir o usuário:", error);

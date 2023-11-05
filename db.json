@@ -54,13 +54,6 @@
       "senha": "1234",
       "chavePix": "123123123",
       "id": 9
-    },
-    {
-      "nome": "abelha2",
-      "email": "abelha2@email.com",
-      "senha": "123",
-      "chavePix": "abelha2",
-      "id": 10
     }
   ]
 }
