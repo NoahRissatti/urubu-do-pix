@@ -1,5 +1,5 @@
 // External Libraries
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 
 // Components
 
@@ -12,6 +12,7 @@ import {
   Title,
 } from "./styles";
 import { TitledInput } from "../../components/TitledInput";
+import { RadioGroup } from "../../components/RadioInput";
 import { Button } from "../../components/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -25,7 +26,42 @@ export const Register: React.FC = () => {
     chavePix: "",
   });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [chavePixValidationType, setChavePixValidationType] = useState(() => (chave: string) => isCpfValid(chave));
+  
+  const isCpfValid = (cpf: string): boolean => {
+    alert("usando cpf");
+    const cpfClean = cpf.replace(/[^\d]/g, '');  
+    
+    if (cpfClean.length !== 11) {
+      return false;
+    }
+    
+    if (/^(\d)\1{10}$/.test(cpfClean)) {
+      return false;
+    }
+    
+    const cpfArray = cpfClean.split('').map(Number);
+    const firstVerifier = cpfArray.slice(0, 9);
+    const secondVerifier = cpfArray.slice(0, 10);
+  
+    const calculateDigit = (arr: number[]) => {
+      let total = 0;
+      let multiplier = arr.length + 1;
+      for (const digit of arr) {
+        total += digit * multiplier;
+        multiplier--;
+      }
+      const remainder = total % 11;
+      return remainder < 2 ? 0 : 11 - remainder;
+    };
+    
+    const firstDigit = calculateDigit(firstVerifier);
+    const secondDigit = calculateDigit(secondVerifier);
+    
+    return firstDigit === cpfArray[9] && secondDigit === cpfArray[10];
+  }
 
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -39,16 +75,23 @@ export const Register: React.FC = () => {
     return emailRegex.test(email);
   };
 
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (Object.values(formData).some((value) => value === "")) {
       alert("Por favor, preencha todos os campos antes de enviar.");
       return;
     }
-
+    
     if (!isEmailValid(formData.email)) {
       alert("Por favor, insira um endereço de e-mail válido.");
+      return;
+    }
+    
+    setChavePixValidationType((chave: string) => isEmailValid(chave))
+    if(!chavePixValidationType(formData.chavePix)) {
+      alert("Por favor, insira uma chave pix válida.");
       return;
     }
 
@@ -99,6 +142,12 @@ export const Register: React.FC = () => {
                   name="chavePix"
                   value={formData.chavePix}
                   onChange={handleChange}
+                />
+                <RadioGroup
+                  label="Selecione uma opção:"
+                  options={['CPF', 'Email', 'Telefone']}
+                  name="radioOption"
+                  onChange={(e) => console.log('Opção selecionada:', e.target.value)}
                 />
                 <ContainerButtons>
                   <Link to={`/`}>
