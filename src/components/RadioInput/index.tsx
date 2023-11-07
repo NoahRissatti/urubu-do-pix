@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes } from 'react';
-import { InputWrapper, Label } from './styles';
+import { InputWrapper, Label, Label2, Option, Input } from './styles';
 
 interface RadioGroupProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -10,16 +10,18 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({ label, options, ...rest 
   return (
     <InputWrapper>
       <Label>{label}</Label>
+      <Option>
       {options.map((option) => (
-        <label key={option}>
-          <input
+        <Label2 key={option}>
+          <Input
             type="radio"
             value={option}
             {...rest}
-          />
+            />
           {option}
-        </label>
+        </Label2>
       ))}
+      </Option>
     </InputWrapper>
   );
 };
