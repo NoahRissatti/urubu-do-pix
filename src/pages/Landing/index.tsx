@@ -33,7 +33,7 @@ export const Landing: React.FC = () => {
   }, [authUser]);
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return <img src="https://i.pinimg.com/originals/6d/4e/bb/6d4ebb1873a044d18987507fc09184ef.gif"/>;
   }
 
   const handleDeleteUser = () => {
