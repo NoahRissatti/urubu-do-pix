@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, DataContainer, SimpleText, Subtitle, Title } from './styles';
+import { Container, DataContainer, FormContainer, SimpleText, Subtitle, TabelaTradingContainer, Title } from './styles';
 import axios from 'axios';
 import { IUserFromJson } from './types';
 import { useAuthContext } from '../../contexts/useAuthContext';
@@ -54,7 +54,7 @@ export const Landing: React.FC = () => {
       { isEditing ? 
         <EditingStep user={user} setIsEditing={setIsEditing}/> 
         : 
-        <>
+        <FormContainer>
           <Title>Seja bem vindo(a), {user?.nome}</Title>
       
           <DataContainer>
@@ -72,9 +72,20 @@ export const Landing: React.FC = () => {
 
             <Button label={'Excluir perfil'} onClick={handleDeleteUser} style={{backgroundColor: 'red'}}/>
           </DataContainer>
-        </>
+        </FormContainer>
         }
       
+      <TabelaTradingContainer>
+          <Container>
+            <img style={{ width: '100px' }} src='https://st.depositphotos.com/2400497/2903/v/450/depositphotos_29039827-stock-illustration-cartoon-vulture.jpg'/>
+            <img style={{ width: '50px', height: '50px' }} src='https://nwscorretora.com.br/wp-content/uploads/2022/07/logo-pix-icone-1024.png'/>
+          </Container>
+          <Subtitle>Urubu do Pix | Tabela Trading</Subtitle>
+          <SimpleText>R$ 200 retorno R$ 2000</SimpleText>
+          <SimpleText>R$ 250 retorno R$ 2500</SimpleText>
+          <SimpleText>R$ 300 retorno R$ 3000</SimpleText>
+          <SimpleText>R$ 350 retorno R$ 3500</SimpleText>
+      </TabelaTradingContainer>
     </Container>
   );
 };
