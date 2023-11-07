@@ -4,6 +4,7 @@ import axios from 'axios';
 import { IUserFromJson } from './types';
 import { useAuthContext } from '../../contexts/useAuthContext';
 import { Button } from '../../components/Button';
+import { Image } from '../../components/Image';
 import { EditingStep } from './steps/EditingStep';
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +34,7 @@ export const Landing: React.FC = () => {
   }, [authUser]);
 
   if (loading) {
-    return <img src="https://i.pinimg.com/originals/6d/4e/bb/6d4ebb1873a044d18987507fc09184ef.gif"/>;
+    return <Image src="https://i.pinimg.com/originals/6d/4e/bb/6d4ebb1873a044d18987507fc09184ef.gif" alt='zeca urubu' width={700}/>;
   }
 
   const handleDeleteUser = () => {
@@ -99,8 +100,9 @@ export const Landing: React.FC = () => {
       
       <TabelaTradingContainer>
           <Container>
-            <img style={{ width: '100px' }} src='https://st.depositphotos.com/2400497/2903/v/450/depositphotos_29039827-stock-illustration-cartoon-vulture.jpg'/>
-            <img style={{ width: '50px', height: '50px' }} src='https://nwscorretora.com.br/wp-content/uploads/2022/07/logo-pix-icone-1024.png'/>
+
+            <Image  alt="urubu" width={100} src='https://st.depositphotos.com/2400497/2903/v/450/depositphotos_29039827-stock-illustration-cartoon-vulture.jpg'/>
+            <Image alt="logo pix" width={50} height={50} src='https://nwscorretora.com.br/wp-content/uploads/2022/07/logo-pix-icone-1024.png'/>
           </Container>
           <Subtitle>Urubu do Pix | Tabela Trading</Subtitle>
           <SimpleText>R$ 200 retorno R$ 2000</SimpleText>
