@@ -105,10 +105,11 @@ export const Register: React.FC = () => {
         console.error("Erro ao enviar os dados:", error);
       });
   };
+  
   return (
     <Container>
       <Content>
-        <Title>Cadastre-se para utilizar o Urubo do Pix</Title>
+        <Title>Cadastre-se para utilizar o Urubu do Pix</Title>
         <ContainerBody>
           <form onSubmit={handleSubmit}>
             {showSuccessModal ? (

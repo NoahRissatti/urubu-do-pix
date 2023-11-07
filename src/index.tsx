@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { Router, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
+import { Landing } from "./pages/Landing";
+import { AuthContextProvider } from "./contexts/useAuthContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -20,12 +22,18 @@ const router = createBrowserRouter([
     path: "register",
     element: <Register />,
   },
+  {
+    path: "landing",
+    element: <Landing />,
+  }
 ]);
 
 root.render(
 
     <React.StrictMode>
-     <RouterProvider router={router} />
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </React.StrictMode>
  
 );
