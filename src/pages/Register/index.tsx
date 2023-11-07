@@ -17,6 +17,7 @@ import { Button } from "../../components/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { SuccessModal } from "../../components/SuccessModal";
+import e from "express";
 
 export const Register: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -24,12 +25,11 @@ export const Register: React.FC = () => {
     email: "",
     senha: "",
     chavePix: "",
+    tipoChave: ""
   });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [chavePixValidationType, setChavePixValidationType] = useState(() => (chave: string) => isCpfValid(chave));
   
   const isCpfValid = (cpf: string): boolean => {
-    alert("usando cpf");
     const cpfClean = cpf.replace(/[^\d]/g, '');  
     
     if (cpfClean.length !== 11) {
@@ -78,6 +78,8 @@ export const Register: React.FC = () => {
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    console.log(formData)
     
     if (Object.values(formData).some((value) => value === "")) {
       alert("Por favor, preencha todos os campos antes de enviar.");
@@ -88,12 +90,13 @@ export const Register: React.FC = () => {
       alert("Por favor, insira um endereço de e-mail válido.");
       return;
     }
-    
-    setChavePixValidationType((chave: string) => isEmailValid(chave))
-    if(!chavePixValidationType(formData.chavePix)) {
+
+    if((formData.tipoChave === "CPF" && !isCpfValid(formData.chavePix)) || 
+    (formData.tipoChave === "Email" && !isEmailValid(formData.chavePix))) {
       alert("Por favor, insira uma chave pix válida.");
       return;
     }
+
 
     axios
       .post("http://localhost:3001/users", formData)
@@ -145,11 +148,11 @@ export const Register: React.FC = () => {
                   onChange={handleChange}
                 />
                 <RadioGroup
-                  label="Selecione uma opção:"
-                  options={['CPF', 'Email', 'Telefone']}
+                  label="Selecione o tipo de chave pix"
+                  options={['CPF', 'Email']}
                   name="radioOption"
-                  onChange={(e) => console.log('Opção selecionada:', e.target.value)}
-                />
+                  onChange={(e) => formData.tipoChave = e.target.value}
+                  />
                 <ContainerButtons>
                   <Link to={`/`}>
                     <Button label={"Cancelar"} />
