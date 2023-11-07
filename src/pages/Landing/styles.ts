@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface Props {
+    visible?: boolean
+}
+
 export const Container = styled.div`
     display: flex;
     flex-direction: row;
@@ -18,6 +22,14 @@ export const DataContainer = styled.div`
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
+
+`
+
+export const AmountReceivedContainer = styled.div<Props>`
+    display: ${({ visible }) => visible ? 'flex' : 'none'};
+    flex-direction: column;
+    gap: 0.5rem;
+
 `
 
 export const TabelaTradingContainer = styled.div`

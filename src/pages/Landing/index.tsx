@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, DataContainer, FormContainer, SimpleText, Subtitle, TabelaTradingContainer, Title } from './styles';
+import { AmountReceivedContainer, Container, DataContainer, FormContainer, SimpleText, Subtitle, TabelaTradingContainer, Title } from './styles';
 import axios from 'axios';
 import { IUserFromJson } from './types';
 import { useAuthContext } from '../../contexts/useAuthContext';
@@ -15,6 +15,7 @@ export const Landing: React.FC = () => {
   const [user, setUser] = useState<IUserFromJson | null>(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [transferAmount, setTransferAmount] = useState<number>(0);
 
   useEffect(() => {
@@ -50,6 +51,11 @@ export const Landing: React.FC = () => {
     }
   };
 
+  function handleTransfer () {
+    alert("Transferência realizada com sucesso!")
+    setIsVisible(true)
+  }
+
   return (
     <Container>
       { isEditing ? 
@@ -78,12 +84,14 @@ export const Landing: React.FC = () => {
 
             <Button label={'Excluir perfil'} onClick={handleDeleteUser} style={{backgroundColor: 'red'}}/>
             
-            <Button label={`Transferir R$${transferAmount}`} onClick={() => alert("Transferência realizada!")}/>
+            <Button label={`Transferir R$${transferAmount}`} onClick={() => handleTransfer()}/>
           </DataContainer>
 
-          <DataContainer>
-            
-          </DataContainer>
+          <AmountReceivedContainer visible={isVisible}>
+            <Title style={{color: 'red'}}>Ops!</Title>
+            <Subtitle>Houve algum erro do nosso lado.</Subtitle>
+            <SimpleText>Vamos transferir o dinheiro mais tarde!</SimpleText>
+          </AmountReceivedContainer>
           
         </FormContainer>
         }
