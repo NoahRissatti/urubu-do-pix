@@ -15,6 +15,7 @@ export const Landing: React.FC = () => {
   const [user, setUser] = useState<IUserFromJson | null>(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [transferAmount, setTransferAmount] = useState<number>(0);
 
   useEffect(() => {
     if (authUser) {
@@ -68,10 +69,22 @@ export const Landing: React.FC = () => {
           </DataContainer>
 
           <DataContainer>
+            <Subtitle>Quantidade a transferir: </Subtitle>
+            <input type="number" value={transferAmount} onChange={(e) => setTransferAmount(Number(e.target.value))} />
+          </DataContainer>
+
+          <DataContainer>
             <Button label={'Editar dados'} onClick={() => setIsEditing(!isEditing)}/>
 
             <Button label={'Excluir perfil'} onClick={handleDeleteUser} style={{backgroundColor: 'red'}}/>
+            
+            <Button label={`Transferir R$${transferAmount}`} onClick={() => alert("Transferência realizada!")}/>
           </DataContainer>
+
+          <DataContainer>
+            
+          </DataContainer>
+          
         </FormContainer>
         }
       
