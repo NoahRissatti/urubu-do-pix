@@ -21,6 +21,10 @@ width: 30%;
 border-radius: 5px;
 border: 1px solid #ddecfa;
 gap: 2rem;
+
+@media screen and (max-width: 900px) {
+    width: 80%;
+  }
 `
 
 export const ContainerButtons = styled.div`
