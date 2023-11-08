@@ -63,7 +63,6 @@ export const Landing: React.FC = () => {
     } else {
       setFakeAmount(10 * transferAmount);
     }
-    alert("Transferência realizada com sucesso!")
     setIsVisible(true)
   }
 
@@ -103,7 +102,7 @@ export const Landing: React.FC = () => {
             <Title style={{color: 'red'}}>Ops!</Title>
             <Subtitle>Houve algum erro do nosso lado.</Subtitle>
             <SimpleText>Vamos transferir o dinheiro mais tarde!</SimpleText>
-            <a href='https://imgur.com/a/aUvJ5BJ'>Converse com nosso Atendimento ao Cliente</a>
+            <a href='https://imgur.com/a/aUvJ5BJ'>Converse com nosso Atendimento ao Cliente ou reinicie a página</a>
           </AmountReceivedContainer>
             :
           <AmountReceivedContainer visible={isVisible}>
