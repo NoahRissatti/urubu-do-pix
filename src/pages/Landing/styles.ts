@@ -8,6 +8,18 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    
+    @media screen and (max-width: 600px) {
+        flex-direction: column-reverse;
+      }
+`
+
+
+export const InnerContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `
 
 export const FormContainer = styled.div`
@@ -29,15 +41,18 @@ export const AmountReceivedContainer = styled.div<Props>`
     display: ${({ visible }) => visible ? 'flex' : 'none'};
     flex-direction: column;
     gap: 0.5rem;
+    
 
 `
 
 export const TabelaTradingContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    margin-left: 5rem;
+    // padding: 2rem;
+    // margin-left: 5rem;
     row-gap: 0.5rem;
+
+
 `
 
 export const Title = styled.text`

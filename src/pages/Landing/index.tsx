@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AmountReceivedContainer, Container, DataContainer, FormContainer, SimpleText, Subtitle, TabelaTradingContainer, Title } from './styles';
+import { AmountReceivedContainer, Container, InnerContainer, DataContainer, FormContainer, SimpleText, Subtitle, TabelaTradingContainer, Title } from './styles';
 import axios from 'axios';
 import { IUserFromJson } from './types';
 import { useAuthContext } from '../../contexts/useAuthContext';
@@ -116,11 +116,10 @@ export const Landing: React.FC = () => {
         }
       
       <TabelaTradingContainer>
-          <Container>
-
+          <InnerContainer>
             <Image  alt="urubu" width={100} src='https://st.depositphotos.com/2400497/2903/v/450/depositphotos_29039827-stock-illustration-cartoon-vulture.jpg'/>
             <Image alt="logo pix" width={50} height={50} src='https://nwscorretora.com.br/wp-content/uploads/2022/07/logo-pix-icone-1024.png'/>
-          </Container>
+          </InnerContainer>
           <Subtitle>Urubu do Pix | Tabela Trading</Subtitle>
           <SimpleText>R$ 200 retorno R$ 2000</SimpleText>
           <SimpleText>R$ 250 retorno R$ 2500</SimpleText>
