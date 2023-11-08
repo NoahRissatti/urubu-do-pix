@@ -79,7 +79,7 @@ export const Register: React.FC = () => {
     return axios
       .get("http://localhost:3001/users")
       .then(function (response) {
-        const user = response.data.find(function (usuario: any) {
+        const user = response.data.find((usuario: any) => {
           return usuario.email === email;
         });
   
