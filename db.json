@@ -7,6 +7,14 @@
       "chavePix": "teste@email.com",
       "tipoChave": "Email",
       "id": 1
+    },
+    {
+      "nome": "admin",
+      "email": "admin@gmail.com",
+      "senha": "1234",
+      "chavePix": "admin@gmail.com",
+      "tipoChave": "Email",
+      "id": 2
     }
   ]
 }
