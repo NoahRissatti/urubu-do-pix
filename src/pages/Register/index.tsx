@@ -75,11 +75,22 @@ export const Register: React.FC = () => {
     return emailRegex.test(email);
   };
 
+  async function userExists(email: string) {
+  return axios
+    .get("http://localhost:3001/users")
+    .then(function (response) {
+      return response.data.find(function (usuario: any) {
+        return usuario.email === email;
+      });
+    })
+    .catch(function (error) {
+      console.error("Erro ao enviar os dados:", error);
+    });
+}
   
-  const handleSubmit = (e: React.FormEvent) => {
+  
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log(formData)
     
     if (Object.values(formData).some((value) => value === "")) {
       alert("Por favor, preencha todos os campos antes de enviar.");
@@ -90,15 +101,16 @@ export const Register: React.FC = () => {
       alert("Por favor, insira um endereço de e-mail válido.");
       return;
     }
-
+    
     if((formData.tipoChave === "CPF" && !isCpfValid(formData.chavePix)) || 
     (formData.tipoChave === "Email" && !isEmailValid(formData.chavePix))) {
       alert("Por favor, insira uma chave pix válida.");
       return;
     }
-
-
-    axios
+    
+    if (await userExists(formData.email)){
+      console.log("aasda")
+      axios
       .post("http://localhost:3001/users", formData)
       .then((response) => {
         console.log("Dados enviados com sucesso:", response.data);
@@ -107,12 +119,14 @@ export const Register: React.FC = () => {
       .catch((error) => {
         console.error("Erro ao enviar os dados:", error);
       });
+    }
   };
+
   
   return (
     <Container>
       <Content>
-        <Title>Cadastre-se para utilizar o Urubu do Pix</Title>
+        <Title>Cadastre-se para utilizar o Urubu do Pix</Title> 
         <ContainerBody>
           <form onSubmit={handleSubmit}>
             {showSuccessModal ? (
