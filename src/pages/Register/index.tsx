@@ -75,21 +75,23 @@ export const Register: React.FC = () => {
     return emailRegex.test(email);
   };
 
-  async function userExists(email: string) {
-  return axios
-    .get("http://localhost:3001/users")
-    .then(function (response) {
-      return response.data.find(function (usuario: any) {
-        return usuario.email === email;
+  const userExists = (email: string) => {
+    return axios
+      .get("http://localhost:3001/users")
+      .then(function (response) {
+        const user = response.data.find(function (usuario: any) {
+          return usuario.email === email;
+        });
+  
+        return user !== undefined;
+      })
+      .catch(function (error) {
+        console.error("Erro ao enviar os dados:", error);
+        return false;
       });
-    })
-    .catch(function (error) {
-      console.error("Erro ao enviar os dados:", error);
-    });
-}
+  }
   
-  
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit =  (e: React.FormEvent) => {
     e.preventDefault();
     
     if (Object.values(formData).some((value) => value === "")) {
@@ -108,18 +110,26 @@ export const Register: React.FC = () => {
       return;
     }
     
-    if (await userExists(formData.email)){
-      console.log("aasda")
-      axios
-      .post("http://localhost:3001/users", formData)
-      .then((response) => {
-        console.log("Dados enviados com sucesso:", response.data);
-        setShowSuccessModal(true);
-      })
-      .catch((error) => {
-        console.error("Erro ao enviar os dados:", error);
-      });
-    }
+    userExists(formData.email)
+    .then((userExists) => {
+      if (userExists) {
+        console.log("O usuário já existe.");
+      } else {
+        axios
+          .post("http://localhost:3001/users", formData)
+          .then((response) => {
+            console.log("Dados enviados com sucesso:", response.data);
+            setShowSuccessModal(true);
+          })
+          .catch((error) => {
+            console.error("Erro ao enviar os dados:", error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.error("Erro ao verificar a existência do usuário:", error);
+    });
+  
   };
 
   
