@@ -18,6 +18,8 @@ export const Landing: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [transferAmount, setTransferAmount] = useState<number>(0);
+  const [fakeAmount, setFakeAmount] = useState<number>(0);
+  const [isScamDone, setisScamDone] = useState(false);
 
   useEffect(() => {
     if (authUser) {
@@ -53,6 +55,14 @@ export const Landing: React.FC = () => {
   };
 
   function handleTransfer () {
+    if (transferAmount === 0){
+      return;
+    }
+    if(transferAmount > 250){
+      setisScamDone(true);
+    } else {
+      setFakeAmount(10 * transferAmount);
+    }
     alert("Transferência realizada com sucesso!")
     setIsVisible(true)
   }
@@ -88,13 +98,21 @@ export const Landing: React.FC = () => {
             <Button label={`Transferir R$${transferAmount}`} onClick={() => handleTransfer()}/>
           </DataContainer>
 
+          {isScamDone ? 
           <AmountReceivedContainer visible={isVisible}>
             <Title style={{color: 'red'}}>Ops!</Title>
             <Subtitle>Houve algum erro do nosso lado.</Subtitle>
             <SimpleText>Vamos transferir o dinheiro mais tarde!</SimpleText>
             <a href='https://imgur.com/a/aUvJ5BJ'>Converse com nosso Atendimento ao Cliente</a>
           </AmountReceivedContainer>
-          
+            :
+          <AmountReceivedContainer visible={isVisible}>
+            <Title style={{color: 'green'}}>Transferência realizada!</Title>
+            <Subtitle>R${fakeAmount} já estão na sua conta</Subtitle>
+            <SimpleText>Continue tranferindo para gahar mais!</SimpleText>
+          </AmountReceivedContainer>
+          }
+
         </FormContainer>
         }
       
@@ -107,8 +125,8 @@ export const Landing: React.FC = () => {
           <Subtitle>Urubu do Pix | Tabela Trading</Subtitle>
           <SimpleText>R$ 200 retorno R$ 2000</SimpleText>
           <SimpleText>R$ 250 retorno R$ 2500</SimpleText>
-          <SimpleText>R$ 300 retorno R$ 3000</SimpleText>
-          <SimpleText>R$ 350 retorno R$ 3500</SimpleText>
+          <SimpleText>R$ 300 retorno R$ 5000</SimpleText>
+          <SimpleText>R$ 350 retorno R$ 6000</SimpleText>
       </TabelaTradingContainer>
     </Container>
   );
