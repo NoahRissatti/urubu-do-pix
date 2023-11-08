@@ -113,7 +113,7 @@ export const Register: React.FC = () => {
     userExists(formData.email)
     .then((userExists) => {
       if (userExists) {
-        console.log("O usuário já existe.");
+        alert("O usuário já existe.");
       } else {
         axios
           .post("http://localhost:3001/users", formData)
