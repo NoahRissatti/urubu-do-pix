@@ -30,4 +30,8 @@ public class LoginPage {
         driver.findElement(passwordInput).sendKeys(password);
     }
 
+    public String getCurrentURL(){
+        return driver.getCurrentUrl();
+    }
+
 }
