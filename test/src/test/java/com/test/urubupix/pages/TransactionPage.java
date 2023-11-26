@@ -1,6 +1,9 @@
 package com.test.urubupix.pages;
 
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
 public class TransactionPage {
     private WebDriver driver;
     private By updateUserButton = By.cssSelector("button:nth-child(1)");
