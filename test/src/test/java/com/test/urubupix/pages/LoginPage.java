@@ -1,4 +1,4 @@
-package com.test.urubupix;
+package com.test.urubupix.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
