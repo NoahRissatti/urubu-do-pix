@@ -92,6 +92,16 @@ public class LoginTest {
         assertThat(alertText).isEqualTo(result);
     }
 
+    @DisplayName("test if the register button redirect to RegisterPage")
+    @ParameterizedTest
+    @MethodSource("provideRegisterPage")
+    void testRegisterButton(String result) throws InterruptedException {
+        loginPage.clickRegisterButton();
+        Thread.sleep(1000);
+
+        assertThat(loginPage.getCurrentURL()).isEqualTo(result);
+    }
+
     static Stream<Arguments> provideUserSuccessTest() {
         return Stream.of(
                 Arguments.of(
@@ -117,6 +127,14 @@ public class LoginTest {
                 Arguments.of(
                         "!@#@#%!@#",
                         "Por favor, preencha todos os campos antes de fazer o login."
+                )
+        );
+    }
+
+    static Stream<Arguments> provideRegisterPage() {
+        return Stream.of(
+                Arguments.of(
+                        "http://localhost:3000/register"
                 )
         );
     }
