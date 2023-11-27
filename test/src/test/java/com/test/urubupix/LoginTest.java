@@ -76,6 +76,22 @@ public class LoginTest {
         assertThat(alertText).isEqualTo(result);
     }
 
+    @DisplayName("test if the password input are empty")
+    @ParameterizedTest
+    @MethodSource("provideEmptyInput")
+    void testPasswordInputEmail(String userEmail, String result) throws InterruptedException {
+        loginPage.writeEmailValue(userEmail);
+        Thread.sleep(1000);
+        loginPage.clickLoginButton();
+        Thread.sleep(1000);
+
+        final Alert alert = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.alertIsPresent());
+        final String alertText = alert.getText();
+        alert.accept();
+        assertThat(alertText).isEqualTo(result);
+    }
+
     static Stream<Arguments> provideUserSuccessTest() {
         return Stream.of(
                 Arguments.of(
