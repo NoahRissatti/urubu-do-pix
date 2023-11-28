@@ -60,6 +60,48 @@ public class LoginTest {
         assertThat(alertText).isEqualTo(result);
     }
 
+    @DisplayName("test if the email input are empty")
+    @ParameterizedTest
+    @MethodSource("provideEmptyInput")
+    void testEmptyInputEmail(String userPassword, String result) throws InterruptedException {
+        loginPage.writePasswordValue(userPassword);
+        Thread.sleep(1000);
+        loginPage.clickLoginButton();
+        Thread.sleep(1000);
+
+        final Alert alert = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.alertIsPresent());
+        final String alertText = alert.getText();
+        alert.accept();
+        assertThat(alertText).isEqualTo(result);
+    }
+
+    @DisplayName("test if the password input are empty")
+    @ParameterizedTest
+    @MethodSource("provideEmptyInput")
+    void testPasswordInputEmail(String userEmail, String result) throws InterruptedException {
+        loginPage.writeEmailValue(userEmail);
+        Thread.sleep(1000);
+        loginPage.clickLoginButton();
+        Thread.sleep(1000);
+
+        final Alert alert = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.alertIsPresent());
+        final String alertText = alert.getText();
+        alert.accept();
+        assertThat(alertText).isEqualTo(result);
+    }
+
+    @DisplayName("test if the register button redirect to RegisterPage")
+    @ParameterizedTest
+    @MethodSource("provideRegisterPage")
+    void testRegisterButton(String result) throws InterruptedException {
+        loginPage.clickRegisterButton();
+        Thread.sleep(1000);
+
+        assertThat(loginPage.getCurrentURL()).isEqualTo(result);
+    }
+
     static Stream<Arguments> provideUserSuccessTest() {
         return Stream.of(
                 Arguments.of(
@@ -76,6 +118,23 @@ public class LoginTest {
                         "errorerror@gmail.com",
                         "!@#$!@",
                         "Email ou senha incorretos. Tente novamente."
+                )
+        );
+    }
+
+    static Stream<Arguments> provideEmptyInput() {
+        return Stream.of(
+                Arguments.of(
+                        "!@#@#%!@#",
+                        "Por favor, preencha todos os campos antes de fazer o login."
+                )
+        );
+    }
+
+    static Stream<Arguments> provideRegisterPage() {
+        return Stream.of(
+                Arguments.of(
+                        "http://localhost:3000/register"
                 )
         );
     }
