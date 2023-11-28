@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 
 public class EditingPage {
     private WebDriver driver;
-    private By nameInput = By.cssSelector("[placeholder='Insira seu novo nome']");
-    private By emailInput = By.cssSelector("[placeholder='Insira seu novo e-mail']");
-    private By passwordInput = By.cssSelector("[placeholder='Insira sua nova senha']");
-    private By pixInput = By.cssSelector("[placeholder='Insira sua nova chave do pix']");
-    private By confirmButton = By.cssSelector("button.sc-pNWRh.jrTSJM");
+    private By nameInput = By.cssSelector("input[name='nome']");
+    private By emailInput = By.cssSelector("input[name='email']");
+    private By passwordInput = By.cssSelector("input[name='senha']");
+    private By pixInput = By.cssSelector("input[name='chavePix']");
+
+    private By confirmButton = By.cssSelector(("button:nth-child(1)"));
 
     public EditingPage(WebDriver driver) {
         this.driver = driver;
@@ -38,4 +39,21 @@ public class EditingPage {
     public String getCurrentUrl(){
         return driver.getCurrentUrl();
     }
+
+    public String getNameInputValue() {
+        return driver.findElement(nameInput).getAttribute("value");
+    }
+
+    public String getEmailInputValue() {
+        return driver.findElement(emailInput).getAttribute("value");
+    }
+
+    public String getPasswordInputValue() {
+        return driver.findElement(passwordInput).getAttribute("value");
+    }
+
+    public String getPixInputValue() {
+        return driver.findElement(pixInput).getAttribute("value");
+    }
+
 }
