@@ -42,7 +42,7 @@ public class RegisterPage {
         }
     }
     public String getRegisterizedUser(){
-        final By successLabel = By.cssSelector("#root>div>div>text");
+        final By successLabel = By.cssSelector("#root>div>div>div>form>div>div>p");
         return driver.findElement(successLabel).getText();
     }
     public String getCurrentURL(){
