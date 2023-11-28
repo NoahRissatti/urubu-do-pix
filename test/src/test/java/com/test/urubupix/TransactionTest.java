@@ -46,6 +46,23 @@ public class TransactionTest {
         assertThat(transactionPage.getTransferResult()).isEqualTo(result);
     }
 
+    @DisplayName("Test transaction greater than 250 that triggers Pilantragem")
+    @ParameterizedTest
+    @MethodSource("providePilantragemTransactionValueTest")
+    void testTriggeringPilantragemTransaction(String userEmail, String userPassword, String moneyInput, String result) throws InterruptedException {
+        loginPage.writeEmailValue(userEmail);
+        Thread.sleep(1000);
+        loginPage.writePasswordValue(userPassword);
+        Thread.sleep(1000);
+        loginPage.clickLoginButton();
+        Thread.sleep(1000);
+        transactionPage.writeTransferValue(moneyInput);
+        Thread.sleep(1000);
+        transactionPage.clickTransferButton();
+        Thread.sleep(1000);
+        assertThat(transactionPage.getTransferResult()).isEqualTo(result);
+    }
+
     @DisplayName("Test letter input for transaction field")
     @ParameterizedTest
     @MethodSource("provideLetterInputTest")
@@ -68,6 +85,17 @@ public class TransactionTest {
                         "1234",
                         "250",
                         "Transferência realizada!"
+                )
+        );
+    }
+
+    static Stream<Arguments> providePilantragemTransactionValueTest() {
+        return Stream.of(
+                Arguments.of(
+                        "teste@email.com",
+                        "1234",
+                        "251",
+                        "Ops!"
                 )
         );
     }
