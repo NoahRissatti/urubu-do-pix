@@ -38,7 +38,7 @@ public class RegisterPage {
         if(pixType.equals(PixType.CPF)){
             driver.findElement(cpfRadioInput).click();
         }else {
-            driver.findElement(emailInput).click();
+            driver.findElement(emailRadioInput).click();
         }
     }
     public String getCurrentURL(){
