@@ -46,6 +46,21 @@ public class TransactionTest {
         assertThat(transactionPage.getTransferResult()).isEqualTo(result);
     }
 
+    @DisplayName("Test letter input for transaction field")
+    @ParameterizedTest
+    @MethodSource("provideLetterInputTest")
+    void testLetterInputForTransactionField(String userEmail, String userPassword, String moneyInput, String result) throws InterruptedException{
+        loginPage.writeEmailValue(userEmail);
+        Thread.sleep(1000);
+        loginPage.writePasswordValue(userPassword);
+        Thread.sleep(1000);
+        loginPage.clickLoginButton();
+        Thread.sleep(1000);
+        transactionPage.writeTransferValue(moneyInput);
+        Thread.sleep(1000);
+        assertThat(transactionPage.getMoneyInputFieldValue()).isEqualTo(result);
+    }
+
     static Stream<Arguments> providePositiveTransactionValueTest() {
         return Stream.of(
                 Arguments.of(
@@ -53,6 +68,17 @@ public class TransactionTest {
                         "1234",
                         "250",
                         "Transferência realizada!"
+                )
+        );
+    }
+
+    static Stream<Arguments> provideLetterInputTest() {
+        return Stream.of(
+                Arguments.of(
+                        "teste@email.com",
+                        "1234",
+                        "a",
+                        null
                 )
         );
     }
