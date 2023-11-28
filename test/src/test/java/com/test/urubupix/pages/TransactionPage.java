@@ -40,7 +40,7 @@ public class TransactionPage {
         driver.findElement(cashInput).sendKeys(transferValue);
     }
 
-    public void selectAllInputValue() { driver.findElement(cashInput).sendKeys(Keys.chord(Keys.CONTROL, "a"));}
+    public void selectDownKey() { driver.findElement(cashInput).sendKeys(Keys.chord(Keys.DOWN));}
 
     public String getUserEmail(){
         return driver.findElement(userEmail).getText();
