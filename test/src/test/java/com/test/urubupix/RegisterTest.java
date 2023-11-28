@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -66,6 +68,20 @@ public class RegisterTest {
         assertThat(alertText).isEqualTo(result);
     }
 
+    @DisplayName("test empty inputs")
+    @ParameterizedTest
+    @MethodSource("provideEmptyInputs")
+    void testEmptyInputs(String result) throws InterruptedException {
+        registerPage.clickRegisterButton();
+        Thread.sleep(1000);
+        final Alert alert = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.alertIsPresent());
+        String alertText = alert.getText();
+        alert.accept();
+
+        assertThat(alertText).isEqualTo(result);
+    }
+
     static Stream<Arguments> provideCancelButton() {
         return Stream.of(
                 Arguments.of(
@@ -73,7 +89,6 @@ public class RegisterTest {
                 )
         );
     }
-
     static Stream<Arguments> provideUserInUse() {
         return Stream.of(
                 Arguments.of(
@@ -81,6 +96,13 @@ public class RegisterTest {
                        "teste@email.com",
                         "1234",
                         "O usuário já existe."
+                )
+        );
+    }
+    static Stream<Arguments> provideEmptyInputs() {
+        return Stream.of(
+                Arguments.of(
+                        "Por favor, preencha todos os campos antes de enviar."
                 )
         );
     }
