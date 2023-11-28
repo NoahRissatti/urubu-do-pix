@@ -12,7 +12,8 @@ public class TransactionPage {
     private By cashInput = By.cssSelector("input");
     private By userEmail = By.cssSelector("#root>div>div>div:nth-child(2)>text:nth-child(2)");
     private By userPixKey = By.cssSelector("#root>div>div>div:nth-child(2)>text:nth-child(3)");
-    private By transactionValue = By.className("sc-iJCSeZ iHSnHv");
+    private By transactionValue = By.cssSelector(".sc-cxNGUP.RXNpp");
+    private By textField = By.cssSelector(".sc-iJCSeZ.iHSnHv");
 
     public TransactionPage(WebDriver driver) {
         this.driver = driver;
@@ -42,5 +43,5 @@ public class TransactionPage {
         return driver.findElement(userPixKey).getText();
     }
 
-    public String getTransferResult(){return driver.findElement(transactionValue).getText(); }
+    public String getTransferResult(){return driver.findElement(transactionValue).findElement(textField).getText(); }
 }
