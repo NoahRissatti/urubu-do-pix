@@ -63,6 +63,25 @@ public class TransactionTest {
         assertThat(transactionPage.getTransferResult()).isEqualTo(result);
     }
 
+    @DisplayName("Test transaction with negative number")
+    @ParameterizedTest
+    @MethodSource("provideNegativeTransactionValueTest")
+    void testNegativeValueTransaction(String userEmail, String userPassword, String result) throws InterruptedException {
+        loginPage.writeEmailValue(userEmail);
+        Thread.sleep(1000);
+        loginPage.writePasswordValue(userPassword);
+        Thread.sleep(1000);
+        loginPage.clickLoginButton();
+        Thread.sleep(1000);
+        transactionPage.clickTransferField();
+        Thread.sleep(1000);
+        transactionPage.selectDownKey();
+        Thread.sleep(1000);
+        transactionPage.clickTransferButton();
+        Thread.sleep(1000);
+        assertThat(transactionPage.getTransferResult()).isEqualTo(result);
+    }
+
     @DisplayName("Test letter input for transaction field")
     @ParameterizedTest
     @MethodSource("provideLetterInputTest")
@@ -85,6 +104,16 @@ public class TransactionTest {
                         "1234",
                         "250",
                         "Transferência realizada!"
+                )
+        );
+    }
+
+    static Stream<Arguments> provideNegativeTransactionValueTest() {
+        return Stream.of(
+                Arguments.of(
+                        "teste@email.com",
+                        "1234",
+                        null
                 )
         );
     }
