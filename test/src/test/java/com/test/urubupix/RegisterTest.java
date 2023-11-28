@@ -82,6 +82,25 @@ public class RegisterTest {
         assertThat(alertText).isEqualTo(result);
     }
 
+    @DisplayName("test successful user register")
+    @ParameterizedTest
+    @MethodSource("provideSuccessRegister")
+    void testSuccessfulRegister(String userName, String userEmail, String userPassword, String result) throws InterruptedException {
+        registerPage.writeInputName(userName);
+        Thread.sleep(1000);
+        registerPage.writeInputEmail(userEmail);
+        Thread.sleep(1000);
+        registerPage.writeInputPassword(userPassword);
+        Thread.sleep(1000);
+        registerPage.writeInputPixKey(userEmail);
+        registerPage.selectTypeKey(PixType.EMAIL);
+        Thread.sleep(1000);
+        registerPage.clickRegisterButton();
+        Thread.sleep(2000);
+        final String registeredUserText = registerPage.getRegisterizedUser();
+        assertThat(registeredUserText).isEqualTo(result);
+    }
+
     static Stream<Arguments> provideCancelButton() {
         return Stream.of(
                 Arguments.of(
@@ -103,6 +122,17 @@ public class RegisterTest {
         return Stream.of(
                 Arguments.of(
                         "Por favor, preencha todos os campos antes de enviar."
+                )
+        );
+    }
+
+    static Stream<Arguments> provideSuccessRegister() {
+        return Stream.of(
+                Arguments.of(
+                        "novoUser",
+                        "novouser@gmail.com",
+                        "12345",
+                        "Sua conta foi criada com sucesso."
                 )
         );
     }
