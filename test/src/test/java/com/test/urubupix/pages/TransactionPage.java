@@ -2,6 +2,7 @@ package com.test.urubupix.pages;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 public class TransactionPage {
@@ -34,6 +35,8 @@ public class TransactionPage {
     public void writeTransferValue(String transferValue){
         driver.findElement(cashInput).sendKeys(transferValue);
     }
+
+    public void selectAllInputValue() { driver.findElement(cashInput).sendKeys(Keys.chord(Keys.CONTROL, "a"));}
 
     public String getUserEmail(){
         return driver.findElement(userEmail).getText();
