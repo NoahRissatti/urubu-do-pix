@@ -32,6 +32,10 @@ public class TransactionPage {
         driver.findElement(createTransferButton).click();
     }
 
+    public void clickTransferField(){
+        driver.findElement(cashInput).click();
+    }
+
     public void writeTransferValue(String transferValue){
         driver.findElement(cashInput).sendKeys(transferValue);
     }
