@@ -34,7 +34,6 @@ public class RegisterPage {
     public void writeInputPixKey(String pixKey){
         driver.findElement(pixKeyInput).sendKeys(pixKey);
     }
-
     public void selectTypeKey(PixType pixType){
         if(pixType.equals(PixType.CPF)){
             driver.findElement(cpfRadioInput).click();
@@ -42,5 +41,7 @@ public class RegisterPage {
             driver.findElement(emailInput).click();
         }
     }
-
+    public String getCurrentURL(){
+        return driver.getCurrentUrl();
+    }
 }
