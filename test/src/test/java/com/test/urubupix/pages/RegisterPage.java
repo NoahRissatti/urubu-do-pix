@@ -41,6 +41,10 @@ public class RegisterPage {
             driver.findElement(emailRadioInput).click();
         }
     }
+    public String getRegisterizedUser(){
+        final By successLabel = By.cssSelector("#root>div>div>text");
+        return driver.findElement(successLabel).getText();
+    }
     public String getCurrentURL(){
         return driver.getCurrentUrl();
     }
