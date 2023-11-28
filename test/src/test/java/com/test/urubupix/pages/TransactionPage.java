@@ -44,4 +44,6 @@ public class TransactionPage {
     }
 
     public String getTransferResult(){return driver.findElement(transactionValue).findElement(textField).getText(); }
+
+    public String getMoneyInputFieldValue() { return driver.findElement(cashInput).getAccessibleName(); }
 }
