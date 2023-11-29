@@ -3,12 +3,11 @@ package com.test.urubupix;
 import com.test.urubupix.pages.LoginPage;
 import com.test.urubupix.pages.EditingPage;
 import com.test.urubupix.pages.TransactionPage;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.junit.jupiter.api.Assertions;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EditingTest {
     private WebDriver driver;
 
@@ -19,37 +18,31 @@ public class EditingTest {
     }
 
     @Test
-    public void testLogin() {
+    @Order(1)
+    public void testIfAnyInputAreEmpty() throws InterruptedException{
         LoginPage loginPage = new LoginPage(driver);
-
-        loginPage.writeEmailValue("admin@gmail.com");
-        loginPage.writePasswordValue("1234");
-
-        loginPage.clickLoginButton();
-
         TransactionPage transactionPage = new TransactionPage(driver);
+        Thread.sleep(1000);
+        loginPage.writeEmailValue("teste@email.com");
+        Thread.sleep(1000);
+        loginPage.writePasswordValue("1234");
+        Thread.sleep(1000);
+        loginPage.clickLoginButton();
+        Thread.sleep(1000);
         transactionPage.clickUpdateButton();
-    }
-
-    @Test
-    public void testEmptyFieldsOnConfirm() {
+        Thread.sleep(1000);
         EditingPage editingPage = new EditingPage(driver);
-
-        // Não preencha nenhum campo e clique no botão de confirmação
-        editingPage.clickConfirmButton();
-
-        // Verifique se há uma mensagem de erro ou outra lógica para indicar campos vazios
-        Assertions.assertTrue(isAnyFieldEmpty(editingPage), "Pelo menos um campo deve estar vazio.");
+        Assertions.assertTrue(editingPage.getNameInputValue().isEmpty());
+        Assertions.assertTrue(editingPage.getEmailInputValue().isEmpty());
+        Assertions.assertTrue(editingPage.getPasswordInputValue().isEmpty());
+        Assertions.assertTrue(editingPage.getPixInputValue().isEmpty());
     }
 
-    private boolean isAnyFieldEmpty(EditingPage editingPage) {
-        // Adicione lógica para verificar se pelo menos um campo está vazio
-        String nameValue = editingPage.getNameInputValue();
-        String emailValue = editingPage.getEmailInputValue();
-        String passwordValue = editingPage.getPasswordInputValue();
-        String pixValue = editingPage.getPixInputValue();
-
-        return nameValue.isEmpty() || emailValue.isEmpty() || passwordValue.isEmpty() || pixValue.isEmpty();
+    @AfterEach
+    public void tearDown() {
+        // Fecha o navegador após cada teste
+        if (driver != null) {
+            driver.quit();
+        }
     }
-
 }

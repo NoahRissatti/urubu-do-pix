@@ -1,19 +1,17 @@
 {
   "users": [
     {
-      "nome": "teste",
-      "email": "teste@email.com",
-      "senha": "1234",
-      "chavePix": "teste@email.com",
-      "tipoChave": "Email",
+      "nome": "NovoNome",
+      "email": "novoemail@example.com",
+      "senha": "novaSenha123",
+      "chavePix": "novachavedopix",
       "id": 1
     },
     {
-      "nome": "admin",
-      "email": "admin@gmail.com",
-      "senha": "1234",
-      "chavePix": "admin@gmail.com",
-      "tipoChave": "Email",
+      "nome": "NovoNome",
+      "email": "novoemail@example.com",
+      "senha": "novaSenha123",
+      "chavePix": "novachavedopix",
       "id": 2
     },
     {
@@ -21,8 +19,15 @@
       "email": "teste@teste.com",
       "senha": "123",
       "chavePix": "teste@teste.com",
-      "tipoChave": "Email",
       "id": 3
+    },
+    {
+      "nome": "teste",
+      "email": "teste@email.com",
+      "senha": "1234",
+      "chavePix": "teste@email.com",
+      "tipoChave": "Email",
+      "id": 4
     }
   ]
 }

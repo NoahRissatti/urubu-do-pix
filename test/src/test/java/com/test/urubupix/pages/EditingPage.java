@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 
 public class EditingPage {
     private WebDriver driver;
-    private By nameInput = By.cssSelector("input[name='nome']");
+    private By nameInput = By.cssSelector("input:nth-child(2)");
     private By emailInput = By.cssSelector("input[name='email']");
     private By passwordInput = By.cssSelector("input[name='senha']");
-    private By pixInput = By.cssSelector("input[name='chavePix']");
+    private By pixInput = By.cssSelector("#root input[name='chavePix']");
 
     private By confirmButton = By.cssSelector(("button:nth-child(1)"));
 
