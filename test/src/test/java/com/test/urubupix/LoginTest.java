@@ -1,6 +1,7 @@
 package com.test.urubupix;
 
 import com.test.urubupix.pages.LoginPage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,6 +28,11 @@ public class LoginTest {
         driver = new FirefoxDriver();
         driver.get(baseUrl);
         loginPage = new LoginPage(driver);
+    }
+
+    @AfterEach
+    public void quitPage(){
+        driver.quit();
     }
 
     @DisplayName("test the user success login")
