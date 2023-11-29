@@ -1,10 +1,10 @@
 {
   "users": [
     {
-      "nome": "NovoNome",
+      "nome": "name",
       "email": "novoemail@example.com",
       "senha": "novaSenha123",
-      "chavePix": "novachavedopix",
+      "chavePix": "pixTest",
       "id": 1
     },
     {
@@ -16,18 +16,24 @@
     },
     {
       "nome": "teste",
-      "email": "teste@teste.com",
-      "senha": "123",
-      "chavePix": "teste@teste.com",
+      "email": "sdsadsa",
+      "senha": "sada",
+      "chavePix": "s5d65as",
       "id": 3
     },
     {
-      "nome": "teste",
-      "email": "teste@email.com",
-      "senha": "1234",
-      "chavePix": "teste@email.com",
-      "tipoChave": "Email",
+      "nome": "Test Name",
+      "email": "test@01.com",
+      "senha": "senha123",
+      "chavePix": "pixTest",
       "id": 4
+    },
+    {
+      "nome": "name",
+      "email": "teste@teste.com",
+      "senha": "123",
+      "chavePix": "pixTest",
+      "id": 5
     }
   ]
 }
