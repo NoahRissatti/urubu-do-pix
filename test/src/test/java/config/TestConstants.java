@@ -1,0 +1,7 @@
+package config;
+
+public class TestConstants {
+    public static final String BASE_URL = "http://localhost:3000";
+    public static final String LOGIN_ERROR_MSG = "Email ou senha incorretos. Tente novamente.";
+
+}

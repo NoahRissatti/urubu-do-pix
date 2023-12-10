@@ -29,4 +29,10 @@ public class LoginPage {
     public void clickLoginBtn(){
         driver.findElement(loginBtn).click();
     }
+
+    public String getAlertMessage() {
+        String alertMessage = driver.switchTo().alert().getText();
+        return alertMessage;
+    }
+
 }
