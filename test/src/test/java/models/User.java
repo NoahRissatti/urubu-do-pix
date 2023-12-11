@@ -1,5 +1,7 @@
 package models;
 
+import com.github.javafaker.Faker;
+
 public class User {
     private String name;
     private String email;
@@ -36,5 +38,11 @@ public class User {
     }
     public static User getTestUser() {
         return new User("teste", "teste@email.com", "1234", "teste@email.com", "Email");
+    }
+
+    public static User getFakerUser() {
+        Faker faker = new Faker();
+        String email = faker.internet().emailAddress();
+        return new User(faker.name().firstName(), email, faker.internet().password(), email, "Email");
     }
 }

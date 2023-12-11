@@ -39,8 +39,9 @@ public class LoginTest {
     @Test
     @DisplayName("Should not login with a not registered user")
     void shouldNotLoginWithANotRegisteredUser() {
-        loginPage.writeEmailInput(faker.internet().emailAddress());
-        loginPage.writePassInput(faker.internet().password());
+        User user = User.getFakerUser();
+        loginPage.writeEmailInput(user.getEmail());
+        loginPage.writePassInput(user.getPass());
         loginPage.clickLoginBtn();
         assertThat(loginPage.getAlertMessage()).isEqualTo(LOGIN_ERROR_MSG);
     }
@@ -48,8 +49,9 @@ public class LoginTest {
     @Test
     @DisplayName("Should login with success")
     void shouldLoginWithSuccess() {
-        loginPage.writeEmailInput(User.getTestUser().getEmail());
-        loginPage.writePassInput(User.getTestUser().getPass());
+        User user = User.getTestUser();
+        loginPage.writeEmailInput(user.getEmail());
+        loginPage.writePassInput(user.getPass());
         loginPage.clickLoginBtn();
         assertThat(driver.getCurrentUrl()).isEqualTo(LANDING_URL);
     }
