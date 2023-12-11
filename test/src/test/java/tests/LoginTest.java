@@ -53,4 +53,13 @@ public class LoginTest {
         loginPage.clickLoginBtn();
         assertThat(driver.getCurrentUrl()).isEqualTo(LANDING_URL);
     }
+
+    @Test
+    @DisplayName("Should not login with empty fields")
+    void shouldNotLoginWithEmptyFields() {
+        loginPage.writeEmailInput("");
+        loginPage.writePassInput("");
+        loginPage.clickLoginBtn();
+        assertThat(loginPage.getAlertMessage()).isEqualTo(LOGIN_EMPTY_MSG);
+    }
 }
