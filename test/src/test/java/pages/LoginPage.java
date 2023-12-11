@@ -14,12 +14,12 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    public void writeEmailInput(String emailValue){
-        driver.findElement(emailInput).sendKeys(emailValue);
+    public void writeEmailInput(String email){
+        driver.findElement(emailInput).sendKeys(email);
     }
 
-    public void writePassInput(String password){
-        driver.findElement(passInput).sendKeys(password);
+    public void writePassInput(String pass){
+        driver.findElement(passInput).sendKeys(pass);
     }
 
     public void clickRegisterBtn(){

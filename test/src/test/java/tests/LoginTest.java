@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import models.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,13 +11,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.LoginPage;
 
-import static config.TestConstants.BASE_URL;
-import static config.TestConstants.LOGIN_ERROR_MSG;
+import static config.TestConstants.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LoginTest {
     private WebDriver driver;
     private LoginPage loginPage;
+    private Faker faker;
 
     @BeforeEach
     public void init() {
@@ -27,6 +28,7 @@ public class LoginTest {
         driver = new ChromeDriver(options);
         driver.get(BASE_URL);
         loginPage = new LoginPage(driver);
+        faker = new Faker();
     }
 
     @AfterEach
@@ -37,13 +39,18 @@ public class LoginTest {
     @Test
     @DisplayName("Should not login with a not registered user")
     void shouldNotLoginWithANotRegisteredUser() {
-        Faker faker = new Faker();
         loginPage.writeEmailInput(faker.internet().emailAddress());
         loginPage.writePassInput(faker.internet().password());
         loginPage.clickLoginBtn();
         assertThat(loginPage.getAlertMessage()).isEqualTo(LOGIN_ERROR_MSG);
     }
 
-
-
+    @Test
+    @DisplayName("Should login with success")
+    void shouldLoginWithSuccess() {
+        loginPage.writeEmailInput(User.getTestUser().getEmail());
+        loginPage.writePassInput(User.getTestUser().getPass());
+        loginPage.clickLoginBtn();
+        assertThat(driver.getCurrentUrl()).isEqualTo(LANDING_URL);
+    }
 }
