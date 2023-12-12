@@ -2,6 +2,11 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class RegisterPage {
     private final WebDriver driver;
@@ -9,8 +14,8 @@ public class RegisterPage {
     private final By emailInput = By.name("email");
     private final By passInput = By.name("senha");
     private final By keyInput = By.name("chavePix");
-    private final By cpfRadio = By.cssSelector("input:nth-of-type(5)");
-    private final By emailRadio = By.cssSelector("input:nth-of-type(6)");
+    private final By cpfRadio = By.cssSelector("input[type='radio'][value='CPF']");
+    private final By emailRadio = By.cssSelector("input[type='radio'][value='Email']");
     private final By cancelBtn = By.cssSelector("button:nth-child(1)");
     private final By registerBtn = By.cssSelector("button:nth-child(2)");
 
@@ -46,7 +51,14 @@ public class RegisterPage {
         driver.findElement(cancelBtn).click();
     }
 
-    public void clickRegisterBtn(){
+    public void clickRegisterBtn() {
         driver.findElement(registerBtn).click();
     }
+
+    public String getModalMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h2")));
+        return webElement.getText();
+    }
+
 }

@@ -1,6 +1,5 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import models.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +16,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LoginTest {
     private WebDriver driver;
     private LoginPage loginPage;
-    private Faker faker;
 
     @BeforeEach
     public void init() {
@@ -28,7 +26,6 @@ public class LoginTest {
         driver = new ChromeDriver(options);
         driver.get(BASE_URL);
         loginPage = new LoginPage(driver);
-        faker = new Faker();
     }
 
     @AfterEach
