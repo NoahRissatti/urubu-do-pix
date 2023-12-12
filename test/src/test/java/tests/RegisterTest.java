@@ -83,5 +83,18 @@ public class RegisterTest {
         registerPage.clickRegisterBtn();
         assertThat(registerPage.getAlertMessage()).isEqualTo(REGISTER_INVALID_EMAIL_MSG);
     }
+
+    @Test
+    @DisplayName("Should not register an invalid password")
+    void shouldNotRegisterAnInvalidPassword() {
+        User user = User.getFakerUser();
+        registerPage.writeNameInput(user.getName());
+        registerPage.writeEmailInput(user.getEmail());
+        registerPage.writePassInput(" ");
+        registerPage.selectEmailRadio();
+        registerPage.writeKeyInput(user.getPixKey());
+        registerPage.clickRegisterBtn();
+        assertThat(registerPage.getModalMessage()).isNotEqualTo(REGISTER_SUCCESS_MSG);
+    }
     
 }
