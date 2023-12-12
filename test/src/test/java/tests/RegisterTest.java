@@ -62,13 +62,26 @@ public class RegisterTest {
     @Test
     @DisplayName("Should not register with an empty field")
     void shouldNotRegisterWithEmptyName() {
-        User user = User.getTestUser();
+        User user = User.getFakerUser();
         registerPage.writeEmailInput(user.getEmail());
         registerPage.writePassInput(user.getPass());
         registerPage.selectEmailRadio();
         registerPage.writeKeyInput(user.getPixKey());
         registerPage.clickRegisterBtn();
         assertThat(registerPage.getAlertMessage()).isEqualTo(REGISTER_EMPTY_MSG);
+    }
+
+    @Test
+    @DisplayName("Should not register an invalid email")
+    void shouldNotRegisterAnInvalidEmail() {
+        User user = User.getFakerUser();
+        registerPage.writeNameInput(user.getName());
+        registerPage.writeEmailInput("inv@li.d");
+        registerPage.writePassInput(user.getPass());
+        registerPage.selectEmailRadio();
+        registerPage.writeKeyInput(user.getPixKey());
+        registerPage.clickRegisterBtn();
+        assertThat(registerPage.getAlertMessage()).isEqualTo(REGISTER_INVALID_EMAIL_MSG);
     }
     
 }
