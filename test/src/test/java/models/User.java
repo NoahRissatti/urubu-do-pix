@@ -2,12 +2,15 @@ package models;
 
 import com.github.javafaker.Faker;
 
+import java.util.Locale;
+
 public class User {
     private String name;
     private String email;
     private String pass;
     private String pixKey;
     private String keyType;
+    private static Faker faker = new Faker(new Locale( "pt_BR" ));
 
     public User(String name, String email, String pass, String pixKey, String keyType) {
         this.name = name;
@@ -41,7 +44,6 @@ public class User {
     }
 
     public static User getFakerUser() {
-        Faker faker = new Faker();
         String email = faker.internet().emailAddress();
         return new User(faker.name().firstName(), email, faker.internet().password(), email, "Email");
     }
