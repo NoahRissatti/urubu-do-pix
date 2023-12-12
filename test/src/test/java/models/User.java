@@ -19,6 +19,12 @@ public class User {
         this.pixKey = pixKey;
     }
 
+    public User(String name, String email, String pass) {
+        this.name = name;
+        this.email = email;
+        this.pass = pass;
+    }
+
     public String getName() {
         return name;
     }
@@ -35,7 +41,9 @@ public class User {
         return pixKey;
     }
 
-    
+    public void setPixKey(String pixKey) {
+        this.pixKey = pixKey;
+    }
 
     public static User getTestUser() {
         return new User("teste", "teste@email.com", "1234", "teste@email.com");
@@ -43,18 +51,12 @@ public class User {
 
     public static User getFakerUser(KeyType keyType) {
         String email = faker.internet().emailAddress();
-        User user = new User()
+        User user = new User(faker.name().firstName(), email, faker.internet().password());
         switch (keyType) {
-            case EMAIL -> {
-
-                return new User(faker.name().firstName(), email, faker.internet().password(), email);
-            }
-            case CPF -> {
-                return new User(faker.name().firstName(), faker.internet().emailAddress(),
-                        faker.internet().password(), generateCpfKey());
-            }
+            case EMAIL -> user.setPixKey(email);
+            case CPF -> user.setPixKey(generateCpfKey());
         }
-        return null;
+        return user;
     }
 
     private static String generateCpfKey() {
