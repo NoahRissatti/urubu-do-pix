@@ -110,5 +110,18 @@ public class RegisterTest {
         registerPage.clickRegisterBtn();
         assertThat(registerPage.getModalMessage()).isNotEqualTo(REGISTER_SUCCESS_MSG);
     }
+
+    @Test
+    @DisplayName("Should not register an invalid cpf")
+    void shouldNotRegisterAnInvalidCpf() {
+        User user = User.getFakerUser(KeyType.CPF);
+        registerPage.writeNameInput(user.getName());
+        registerPage.writeEmailInput(user.getEmail());
+        registerPage.writePassInput(user.getPass());
+        registerPage.selectCpfRadio();
+        registerPage.writeKeyInput("12345678910");
+        registerPage.clickRegisterBtn();
+        assertThat(registerPage.getAlertMessage()).isEqualTo(REGISTER_INVALID_PIX_KEY_MSG);
+    }
     
 }
