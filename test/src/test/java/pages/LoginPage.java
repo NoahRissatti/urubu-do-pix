@@ -1,5 +1,6 @@
 package pages;
 
+import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,4 +41,11 @@ public class LoginPage {
         return driver.switchTo().alert().getText();
     }
 
+    public User loginTestUser() {
+        User user = User.getTestUser();
+        writeEmailInput(user.getEmail());
+        writePassInput(user.getPass());
+        clickLoginBtn();
+        return user;
+    }
 }

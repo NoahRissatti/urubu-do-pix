@@ -6,14 +6,14 @@ import org.openqa.selenium.WebDriver;
 public class LandingPage {
     private final WebDriver driver;
     private final By title = By.cssSelector("text:nth-child(1)");
-    private final By userEmail = By.cssSelector("text:nth-child(3)");
-    private final By userKey = By.cssSelector("text:nth-child(5)");
+    private final By userEmail = By.cssSelector("text:nth-child(2)");
+    private final By userKey = By.cssSelector("text:nth-child(3)");
     private final By amountInput = By.cssSelector("input[type='number']");
     private final By editBtn = By.cssSelector("button:nth-child(1)");
     private final By deleteBtn = By.cssSelector("button:nth-child(2)");
     private final By transferBtn = By.cssSelector("button:nth-child(3)");
 
-    LandingPage(WebDriver driver) {
+    public LandingPage(WebDriver driver) {
         this.driver = driver;
     }
 
