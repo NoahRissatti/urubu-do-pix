@@ -10,15 +10,13 @@ public class User {
     private String email;
     private String pass;
     private String pixKey;
-    private String keyType;
     private static Faker faker = new Faker(new Locale( "pt_BR" ));
 
-    public User(String name, String email, String pass, String pixKey, String keyType) {
+    public User(String name, String email, String pass, String pixKey) {
         this.name = name;
         this.email = email;
         this.pass = pass;
         this.pixKey = pixKey;
-        this.keyType = keyType;
     }
 
     public String getName() {
@@ -37,24 +35,26 @@ public class User {
         return pixKey;
     }
 
-    public String getKeyType() {
-        return keyType;
-    }
+    
+
     public static User getTestUser() {
-        return new User("teste", "teste@email.com", "1234", "teste@email.com", "Email");
+        return new User("teste", "teste@email.com", "1234", "teste@email.com");
     }
 
-    public static User getFakerUser() {
+    public static User getFakerUser(KeyType keyType) {
         String email = faker.internet().emailAddress();
-        return new User(faker.name().firstName(), email,
-                faker.internet().password(), email, "Email");
-    }
+        User user = new User()
+        switch (keyType) {
+            case EMAIL -> {
 
-    public static User getFakerWithCpfUser() {
-        return new User(faker.name().firstName(),
-                faker.internet().emailAddress(),
-                faker.internet().password(),
-                generateCpfKey(), "CPF");
+                return new User(faker.name().firstName(), email, faker.internet().password(), email);
+            }
+            case CPF -> {
+                return new User(faker.name().firstName(), faker.internet().emailAddress(),
+                        faker.internet().password(), generateCpfKey());
+            }
+        }
+        return null;
     }
 
     private static String generateCpfKey() {

@@ -1,5 +1,6 @@
 package tests;
 
+import models.KeyType;
 import models.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +37,7 @@ public class RegisterTest {
     @Test
     @DisplayName("Should register a new user with success")
     void shouldRegisterANewUserWithSuccess() {
-        User user = User.getFakerUser();
+        User user = User.getFakerUser(KeyType.EMAIL);
         registerPage.writeNameInput(user.getName());
         registerPage.writeEmailInput(user.getEmail());
         registerPage.writePassInput(user.getPass());
@@ -49,7 +50,7 @@ public class RegisterTest {
     @Test
     @DisplayName("Should register a new user with cpf key with success")
     void shouldRegisterANewUserWithCpfKeyWithSuccess() {
-        User user = User.getFakerWithCpfUser();
+        User user = User.getFakerUser(KeyType.CPF);
         registerPage.writeNameInput(user.getName());
         registerPage.writeEmailInput(user.getEmail());
         registerPage.writePassInput(user.getPass());
@@ -75,7 +76,7 @@ public class RegisterTest {
     @Test
     @DisplayName("Should not register with an empty field")
     void shouldNotRegisterWithEmptyName() {
-        User user = User.getFakerUser();
+        User user = User.getFakerUser(KeyType.EMAIL);
         registerPage.writeEmailInput(user.getEmail());
         registerPage.writePassInput(user.getPass());
         registerPage.selectEmailRadio();
@@ -87,7 +88,7 @@ public class RegisterTest {
     @Test
     @DisplayName("Should not register an invalid email")
     void shouldNotRegisterAnInvalidEmail() {
-        User user = User.getFakerUser();
+        User user = User.getFakerUser(KeyType.EMAIL);
         registerPage.writeNameInput(user.getName());
         registerPage.writeEmailInput("inv@li.d");
         registerPage.writePassInput(user.getPass());
@@ -100,7 +101,7 @@ public class RegisterTest {
     @Test
     @DisplayName("Should not register an invalid password")
     void shouldNotRegisterAnInvalidPassword() {
-        User user = User.getFakerUser();
+        User user = User.getFakerUser(KeyType.EMAIL);
         registerPage.writeNameInput(user.getName());
         registerPage.writeEmailInput(user.getEmail());
         registerPage.writePassInput(" ");

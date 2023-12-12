@@ -1,5 +1,6 @@
 package tests;
 
+import models.KeyType;
 import models.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +37,7 @@ public class LoginTest {
     @Test
     @DisplayName("Should not login with a not registered user")
     void shouldNotLoginWithANotRegisteredUser() {
-        User user = User.getFakerUser();
+        User user = User.getFakerUser(KeyType.EMAIL);
         loginPage.writeEmailInput(user.getEmail());
         loginPage.writePassInput(user.getPass());
         loginPage.clickLoginBtn();
