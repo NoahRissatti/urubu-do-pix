@@ -56,8 +56,6 @@ public class LoginTest {
     @Test
     @DisplayName("Should not login with empty fields")
     void shouldNotLoginWithEmptyFields() {
-        loginPage.writeEmailInput("");
-        loginPage.writePassInput("");
         loginPage.clickLoginBtn();
         assertThat(loginPage.getAlertMessage()).isEqualTo(LOGIN_EMPTY_MSG);
     }
