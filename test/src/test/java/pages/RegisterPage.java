@@ -61,4 +61,10 @@ public class RegisterPage {
         return webElement.getText();
     }
 
+    public String getAlertMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        wait.until(ExpectedConditions.alertIsPresent());
+        return driver.switchTo().alert().getText();
+    }
+
 }

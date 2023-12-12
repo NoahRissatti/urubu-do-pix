@@ -45,5 +45,18 @@ public class RegisterTest {
         registerPage.clickRegisterBtn();
         assertThat(registerPage.getModalMessage()).isEqualTo(REGISTER_SUCCESS_MSG);
     }
+
+    @Test
+    @DisplayName("Should not register a user already registered")
+    void shouldNotRegisterAUserAlreadyRegistered() {
+        User user = User.getTestUser();
+        registerPage.writeNameInput(user.getName());
+        registerPage.writeEmailInput(user.getEmail());
+        registerPage.writePassInput(user.getPass());
+        registerPage.selectEmailRadio();
+        registerPage.writeKeyInput(user.getPixKey());
+        registerPage.clickRegisterBtn();
+        assertThat(registerPage.getAlertMessage()).isEqualTo(REGISTER_USER_ALREADY_EXISTS_MSG);
+    }
     
 }
