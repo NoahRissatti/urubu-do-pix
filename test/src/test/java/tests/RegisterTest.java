@@ -47,6 +47,19 @@ public class RegisterTest {
     }
 
     @Test
+    @DisplayName("Should register a new user with cpf key with success")
+    void shouldRegisterANewUserWithCpfKeyWithSuccess() {
+        User user = User.getFakerWithCpfUser();
+        registerPage.writeNameInput(user.getName());
+        registerPage.writeEmailInput(user.getEmail());
+        registerPage.writePassInput(user.getPass());
+        registerPage.selectCpfRadio();
+        registerPage.writeKeyInput(user.getPixKey());
+        registerPage.clickRegisterBtn();
+        assertThat(registerPage.getModalMessage()).isEqualTo(REGISTER_SUCCESS_MSG);
+    }
+
+    @Test
     @DisplayName("Should not register a user already registered")
     void shouldNotRegisterAUserAlreadyRegistered() {
         User user = User.getTestUser();
