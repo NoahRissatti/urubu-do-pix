@@ -8,5 +8,6 @@ public class TestConstants {
     public static final String LOGIN_EMPTY_MSG = "Por favor, preencha todos os campos antes de fazer o login.";
     public static final String REGISTER_SUCCESS_MSG = "Cadastro bem-sucedido!";
     public static final String REGISTER_USER_ALREADY_EXISTS_MSG = "O usuário já existe.";
+    public static final String REGISTER_EMPTY_MSG = "Por favor, preencha todos os campos antes de enviar.";
 
 }

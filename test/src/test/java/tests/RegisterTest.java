@@ -58,5 +58,17 @@ public class RegisterTest {
         registerPage.clickRegisterBtn();
         assertThat(registerPage.getAlertMessage()).isEqualTo(REGISTER_USER_ALREADY_EXISTS_MSG);
     }
+
+    @Test
+    @DisplayName("Should not register with an empty field")
+    void shouldNotRegisterWithEmptyName() {
+        User user = User.getTestUser();
+        registerPage.writeEmailInput(user.getEmail());
+        registerPage.writePassInput(user.getPass());
+        registerPage.selectEmailRadio();
+        registerPage.writeKeyInput(user.getPixKey());
+        registerPage.clickRegisterBtn();
+        assertThat(registerPage.getAlertMessage()).isEqualTo(REGISTER_EMPTY_MSG);
+    }
     
 }
